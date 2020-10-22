@@ -22,7 +22,7 @@ GitHub houses the largest collection of source code from open source to private 
     - [GUI client](#gui-client)
   - [Creating a new branch](#creating-a-new-branch)
   - [Making some changes and committing them to our local repo](#making-some-changes-and-committing-them-to-our-local-repo)
-  - [Downloading the repository locally on the crick HPC cluster](#downloading-the-repository-locally-on-the-crick-hpc-cluster)
+  - [Downloading the repository locally on the compute cluster](#downloading-the-repository-locally-on-the-compute-cluster)
     - [Setting up a SSH keys for your GitHub account](#setting-up-a-ssh-keys-for-your-github-account)
     - [Switching to the develop branch on the cluster](#switching-to-the-develop-branch-on-the-cluster)
   - [Creating a pull request](#creating-a-pull-request)
@@ -30,7 +30,7 @@ GitHub houses the largest collection of source code from open source to private 
 
 ## Prerequisites ##
 
-Create a GitHub account at [GitHub.com](https://github.com/join). The credentials for that account are yours to choose, they are not linked to Crick credentials.
+Create a GitHub account at [GitHub.com](https://github.com/join). The credentials for that account are yours to choose, they are not linked to Crick credentials. Once you have a GitHub account it is recommended to enable Two-factor Authenticate (2FA) on it.
 
 ## Terminology ##
 
@@ -179,7 +179,7 @@ Downloading a remote repository to get a local copy is called **cloning** a repo
 
 ### GUI client ###
 
-There are a variety of git clients with a graphical interface. You can see a list [here](https://git-scm.com/downloads/guis). If you are on Windows or MacOS, I would recommend using [GitHub Desktop](https://desktop.github.com/). It is developed by GitHub and easy to use. Once you have installed it, sign in with your GitHub account so the application can download non-public repositories you have access to. Then clone the repository we just created.
+There are a variety of git clients with a graphical interface. You can see a list [here](https://git-scm.com/downloads/guis). If you are on Windows or MacOS, I would recommend using [GitHub Desktop](https://desktop.github.com/). It is developed by GitHub and easy to use (for command line access please see below, the part about cloning on the computer cluster). Once you have installed it, sign in with your GitHub account so the application can download non-public repositories you have access to. Then clone the repository we just created.
 
 ![Clone repository...](./images/desktop_clone.png)
 
@@ -247,15 +247,17 @@ We can see the new file on github.com if we switch to the develop branch!
 
 ![github.com develop branch](./images/web_develop_hello.png)
 
-## Downloading the repository locally on the crick HPC cluster ##
+## Downloading the repository locally on the compute cluster ##
 
-Now that we have written a script, we want to test it to make sure it works before we merge the `develop` branch into the `main` branch. We will do this on the crick HPC cluster. You should already have access to a login node.
+Now that we have written a script, we want to test it to make sure it works before we merge the `develop` branch into the `main` branch. We will do this on the compute cluster. You should already have access to a login node.
+
+**Note:** The command line steps below are not just valid for a compute cluster, they can also be used from Linux desktops and from macOS.
 
 To clone a github repository from the command line, we need to use the command `git clone` followed by the URL of the repository. To find that URL, we can look at the repository on the web and click the green **Code** button.
 
 ![Web Code URL](./images/web_download_https.png)
 
-This gives us a URL like this: `https://github.com/FrancisCrickInstitute/data-challenge-hello-world.git`. The command is then `git clone https://github.com/FrancisCrickInstitute/data-challenge-hello-world.git`. Let's try it.
+This gives us a URL like this: `https://github.com/FrancisCrickInstitute/data-challenge-hello-world.git`. The command is then `git clone https://github.com/FrancisCrickInstitute/data-challenge-hello-world.git`. Let's try it. (The `module load` step below might not be necessary depending on your setup)
 
 ```bash
 $ module load git
@@ -267,7 +269,7 @@ remote: Invalid username or password.
 fatal: Authentication failed for 'https://github.com/FrancisCrickInstitute/data-challenge-hello-world.git/'
 ```
 
-The first thing we notice is that we are asked to authenticate. This is normal as our repository is not **Public**, github needs to make sure our account has permission to read the repository. It asks for username and password, but still the authentication failed. This happens if you have enabled multi-factor authentication on your GitHub account or if the repository is owned by an organisation that has enabled Single Sign On (SSO) for its members. In my case here, to access the repository on the github website, I have to log into my github account, which requires username, password and a code via the Google Authenticator app on my phone. On top of that the repo belongs to the FrancisCrickInstitute organisation which has enabled SSO, so I also have to log into Okta with my crick credentials and a code from the authenticator app again. The problem now is that the `git` command only supports username and password but not multi-factor authentication. The solution for that is SSH keys.
+The first thing we notice is that we are asked to authenticate. This is normal as our repository is not **Public**, github needs to make sure our account has permission to read the repository. It asks for username and password, but still the authentication failed. This happens if you have enabled multi-factor authentication on your GitHub account or if the repository is owned by an organisation that has enabled Single Sign On (SSO) for its members. In my case here, to access the repository on the github website, I have to log into my github account, which requires username, password and a code via an authenticator app on my phone. On top of that the repo belongs to the FrancisCrickInstitute organisation which has enabled SSO, so I also have to login with SSO using my work credentials and a code from the authenticator app again. The problem now is that the `git` command only supports username and password but not multi-factor authentication. The solution for that is SSH keys.
 
 ### Setting up a SSH keys for your GitHub account ###
 
@@ -282,7 +284,7 @@ cd ~/.ssh
 
 $ ssh-keygen -t rsa -b 4096 -C "cluster_github"
 Generating public/private rsa key pair.
-Enter file in which to save the key (/camp/home/escudem/.ssh/id_rsa): cluster_github_id_rsa
+Enter file in which to save the key (~/.ssh/id_rsa): cluster_github_id_rsa
 Enter passphrase (empty for no passphrase):
 Enter same passphrase again:
 Your identification has been saved in cluster_github_id_rsa.
@@ -303,14 +305,14 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 
-The command generated two files: *cluster_github_id_rsa* and *cluster_github_id_rsa.pub*. The first one is your private key, and no one should be able to see it, it would be like giving your password. The second file is your public key that you need to add to your github account. First display the key.
+The command generated two files: *cluster_github_id_rsa* and *cluster_github_id_rsa.pub* (the default name would be *id_rsa* and *id_rsa.pub*, but we do not want to overwrite them in case we already have them for another key) . The first one is your private key, and no one should be able to see it, it would be like giving your password. The second file is your public key that you need to add to your github account. First display the key.
 
 ```bash
 $ cat cluster_github_id_rsa.pub
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+uF/iLa8F2yBcCG/U4V4wDSRFa06tBqq1q1baTmIng4QahtJ4zuys1fxgnYt9q5RJT/U57sgco4uShxtZT8MMo7D49M4rd0njxA5LKlJ2ZtnLl84etzsZU2pQ68NqPVkEmoHk2JCVcSssDjN0059INk7OYpJn82tWhZ8Qq05w+MjyuNcBdovBnoE2Hf5n5p3ZlRd3g38fxARHRSirZ8tOHZjX1x6sWwicM5tjes1zWETjzOPY2R3QAplxgoTNjZxlu3Wvx4NIP0yHOLiY8iQTgtItNBEU+R/uY5thnCc7Y4ROctQGvcjLtTj9OZs7+wiTh/WLZMX0Lf+lZ3BJtLDNJhhdSk2bHsEqHCDPGx7hYGiRqbcDlGL0rcxp44XEVNIQnKIBuC/sY/7205fdLE4JrUINKr8UijYzOScvXWw7lXuUWOTgBie9U9cM2VjdfiZqF4H+ZVBVqtUxfk1+opQsUp6zWc+FuPP+SocN4VYU+4e0PjOMxcitoKVV337tzxbc/I2eOApkRSomBGdIieqH0fRcjnevkrO8TfkfwE0bgqSa35EemYxvOVUeFv4aXBbY2ZjtulsqWxEgK4rKHYLBTgOUmS+BQRwF8gWoJaaUkriN+OEKmnC0nRzBnJTnblGZVclPycEE39ST5yMLKPwy3LhgFZCTdcBdHgljbCTB+Q== cluster_github
 ```
 
-Your key is the entire text starting with `ssh-rsa` and finishing with the comment you used in the command to generate the pair. Copy that text to your clipboard and head your [github profile](https://github.com/settings/keys).  You can click the green button **New SSH key** in the top-right corner. Give a title to the key to remember where you are using this one, for example `crick cluster`. Then paste your public key below and confirm by clicking the green button again (at that point you may need to input your github password again).
+Your key is the entire text starting with `ssh-rsa` and finishing with the comment you used in the command to generate the pair. Copy that text to your clipboard and head your [github profile](https://github.com/settings/keys).  You can click the green button **New SSH key** in the top-right corner. Give a title to the key to remember where you are using this one, for example `compute cluster`. Then paste your public key below and confirm by clicking the green button again (at that point you may need to input your github password again).
 
 ![github.com public key](./images/web_public_key.png)
 
@@ -347,7 +349,7 @@ Receiving objects: 100% (7/7), done.
 
 ### Switching to the `develop` branch on the cluster ###
 
-By default `git clone` sets the local branch to be `main`, but our script to test is on the `develop` branch. So first we'll want to move into the newly cloned repository, then we can check which files are there and on which branch we are before changing to the `develop` and checking again.
+By default `git clone` sets the local branch to be `main`, but our script to test is on the `develop` branch. So first we'll want to move into the newly cloned repository, then we can check which files are there and on which branch we are before changing to the `develop` and checking again. (The `module load` step below might not be necessary depending on your setup)
 
 ```bash
 $ cd data-challenge-hello-world/
