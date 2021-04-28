@@ -1,10 +1,10 @@
-# Introduction to GitHub for the Crick Data Challenge 2020 #
+# Introduction to GitHub for the Crick Data Challenge #
 
 GitHub houses the largest collection of source code from open source to private enterprise projects all over the world. It is used extensively by teams within software development companies and by individuals working on their own projects. If you want to manage a large code project, share your work, or collaborate with other developers, knowing how to use Git and Github is essential.
 
 ## Table of contents ##
 
-- [Introduction to GitHub for the Crick Data Challenge 2020](#introduction-to-gitHub-for-the-crick-data-challenge-2020)
+- [Introduction to GitHub for the Crick Data Challenge](#introduction-to-gitHub-for-the-crick-data-challenge)
   - [Prerequisites](#prerequisites)
   - [Terminology](#terminology)
   - [Good practice](#good-practice)
