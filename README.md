@@ -453,3 +453,4 @@ To execute Git commands in your computer, you must open a command shell (also kn
 ### Working with a remote repository ###
 ### A list of most fundamental git commands ###
 ### How to resolve common git issues ###
+### Installing and configuring git on the terminal ###  
