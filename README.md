@@ -27,6 +27,7 @@ GitHub houses the largest collection of source code from open source to private 
     - [Switching to the develop branch on the cluster](#switching-to-the-develop-branch-on-the-cluster)
   - [Creating a pull request](#creating-a-pull-request)
   - [Merging a pull request](#merging-a-pull-request)
+  - [Git on the command line](#git-on-the-command-line)
 
 ## Prerequisites ##
 
@@ -425,3 +426,19 @@ Now that it's done, if we go back to the repository the python script will be vi
 ![github.com main branch after merge](./images/web_main_merged.png)
 
 Now people not contributing but using your code can simply download from the main branch and are sure the code will work.
+
+## Git on the command line ##
+
+So far we have seen how to use git using GUI tools as well as navigate around the GitHub interface. Next, we will take a look at how we can use git on the terminal.
+
+To execute Git commands in your computer, you must open a command shell (also known as command prompt, terminal, and command line) of your preference. Here are some suggestions:
+
+- **For macOS users:**
+  - Built-in: Terminal. Press ⌘ command + space and type “terminal” to find it.
+  - iTerm2, which you can integrate with zsh and oh my zsh for color highlighting, among other handy features for Git users.
+- **For Windows users:**
+  - Built-in: cmd. Click the search icon on the bottom navigation bar on Windows and type cmd to find it.
+  - PowerShell: a Windows “powered up” shell, from which you can execute a greater number of commands.
+  - Git Bash: it comes built into Git for Windows.
+- **For Linux users:**
+  - Built-in: Linux Terminal.
