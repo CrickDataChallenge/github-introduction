@@ -28,11 +28,11 @@ GitHub houses the largest collection of source code from open source to private 
   - [Creating a pull request](#creating-a-pull-request)
   - [Merging a pull request](#merging-a-pull-request)
   - [Git on the command line](#git-on-the-command-line)
-   - [Installing and configuring git on the terminal](#installing-git)
-   - [Setting up your local git repository](#set-up-local-git-repo)
-   - [Working with a remote repository](#working-with-remote-repo)
-   - [A list of most fundamental git commands](#list-of-git-terminal-commands)
-   - [How to resolve common git issues](#how-to-resolve-common-git-issues)
+    - [Installing and configuring git on the terminal](#installing-git)
+    - [Setting up your local git repository](#set-up-local-git-repo)
+    - [Working with a remote repository](#working-with-remote-repo)
+    - [A list of most fundamental git commands](#list-of-git-terminal-commands)
+    - [How to resolve common git issues](#how-to-resolve-common-git-issues)
 
 ## Prerequisites ##
 
@@ -448,4 +448,8 @@ To execute Git commands in your computer, you must open a command shell (also kn
 - **For Linux users:**
   - Built-in: Linux Terminal.
 
-### Installing and configuring git on the terminal ###  
+### Installing and configuring git on the terminal ### 
+### Setting up your local git repository ###
+### Working with a remote repository ###
+### A list of most fundamental git commands ###
+### How to resolve common git issues ###
