@@ -28,10 +28,10 @@ GitHub houses the largest collection of source code from open source to private 
   - [Creating a pull request](#creating-a-pull-request)
   - [Merging a pull request](#merging-a-pull-request)
   - [Git on the command line](#git-on-the-command-line)
-    - [Installing and configuring git on the terminal](#installing-git)
-    - [Setting up your local git repository](#set-up-local-git-repo)
-    - [Working with a remote repository](#working-with-remote-repo)
-    - [A list of most fundamental git commands](#list-of-git-terminal-commands)
+    - [Installing and configuring git on the terminal](#installing-and-configuring-git-on-the-terminal)
+    - [Setting up your local git repository](#setting-up-your-local-git-repository)
+    - [Working with a remote repository](#working-with-a-remote-repository)
+    - [A list of most fundamental git commands](#a-list-of-most-fundamental-git-commands)
     - [How to resolve common git issues](#how-to-resolve-common-git-issues)
 
 ## Prerequisites ##
@@ -449,6 +449,34 @@ To execute Git commands in your computer, you must open a command shell (also kn
   - Built-in: Linux Terminal.
 
 ### Installing and configuring git on the terminal ### 
+
+There are a lot of resources online which will guide you how to download, insntall and configure git in your local machine. A quick Google search ‘How to install git on [your preferred OS]” will reveal a number of resources. Here is a useful link: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+####Configure Git:####
+
+To start using Git from your computer, you must enter your credentials (user name and email) to identify you as the author of your work.
+
+In your shell, add your user name:
+
+```bash
+$ git config --global user.name "your_username"
+```
+
+And your email address:
+
+```bash
+$ git config --global user.email "your_email_address@example.com"
+```
+
+To check the configuration, run:
+
+```bash
+$ git config --global --list
+```
+
+The --global option tells Git to always use this information for anything you do on your system. If you omit --global or use --local, the configuration is applied only to the current repository.
+
+
 ### Setting up your local git repository ###
 ### Working with a remote repository ###
 ### A list of most fundamental git commands ###
