@@ -798,5 +798,14 @@ https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts
 
 There is a compare link in Github interface, which you can use the compare between branches.
 
+#### Q10. How do I compare two branches to see what differences are there between those branches? ####
 
-#### Q10. How do I compare two branches to see what differences are there between those branches?  ####
+There is a compare link in Github interface, which you can use the compare between branches.
+
+
+![GitHub compare link](./images/github-branch-compare.png)
+
+
+Once you’ve clicked the ‘Compare’ button, you will be presented with a screen below. The branch on the left side dropdown is the base branch you’d like to compare your branch against. The right side dropdown is where you can set your branch name.
+
+![Github compare two branches](./images/github-compare-branch-changes.png)
