@@ -27,6 +27,12 @@ GitHub houses the largest collection of source code from open source to private 
     - [Switching to the develop branch on the cluster](#switching-to-the-develop-branch-on-the-cluster)
   - [Creating a pull request](#creating-a-pull-request)
   - [Merging a pull request](#merging-a-pull-request)
+  - [Git on the command line](#git-on-the-command-line)
+    - [Installing and configuring git on the terminal](#installing-and-configuring-git-on-the-terminal)
+    - [Setting up your local git repository](#setting-up-your-local-git-repository)
+    - [Working with a remote repository](#working-with-a-remote-repository)
+    - [A list of most fundamental git commands](#a-list-of-most-fundamental-git-commands)
+    - [How to resolve common git issues](#how-to-resolve-common-git-issues)
 
 ## Prerequisites ##
 
@@ -425,3 +431,381 @@ Now that it's done, if we go back to the repository the python script will be vi
 ![github.com main branch after merge](./images/web_main_merged.png)
 
 Now people not contributing but using your code can simply download from the main branch and are sure the code will work.
+
+## Git on the command line ##
+
+So far we have seen how to use git using GUI tools as well as navigate around the GitHub interface. Next, we will take a look at how we can use git on the terminal.
+
+To execute Git commands in your computer, you must open a command shell (also known as command prompt, terminal, and command line) of your preference. Here are some suggestions:
+
+- **For macOS users:**
+  - Built-in: Terminal. Press ⌘ command + space and type “terminal” to find it.
+  - iTerm2, which you can integrate with zsh and oh my zsh for color highlighting, among other handy features for Git users.
+- **For Windows users:**
+  - Built-in: cmd. Click the search icon on the bottom navigation bar on Windows and type cmd to find it.
+  - PowerShell: a Windows “powered up” shell, from which you can execute a greater number of commands.
+  - Git Bash: it comes built into Git for Windows.
+- **For Linux users:**
+  - Built-in: Linux Terminal.
+
+### Installing and configuring git on the terminal ### 
+
+There are a lot of resources online which will guide you how to download, insntall and configure git on your local machine. A quick Google search ‘How to install git on [your preferred OS]” will reveal a number of resources. Here is a useful link: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+
+#### Configure Git: ####
+
+To start using Git from your computer, you must enter your credentials (user name and email) to identify you as the author of your work.
+
+In your shell, add your user name:
+
+```bash
+$ git config --global user.name "your_username"
+```
+
+And your email address:
+
+```bash
+$ git config --global user.email "your_email_address@example.com"
+```
+
+To check the configuration, run:
+
+```bash
+$ git config --global --list
+```
+
+The --global option tells Git to always use this information for anything you do on your system. If you omit --global or use --local, the configuration is applied only to the current repository.
+
+
+### Setting up your local git repository ###
+
+There maybe a time when you do not have a remote repository to start off with or that you would like to create your own repository and share with your team.
+
+The first step is to create project directory and cd into it. Next, run the following command:
+
+```bash
+$ git init
+```
+The git init command creates a new Git repository. This command turns a directory into an empty Git repository. This is the first step in creating a repository. After running git init, adding and committing files/directories becomes possible.
+
+Usage:
+
+```bash
+# change directory to codebase
+$ cd /file/path/to/code
+# make directory a git repository
+$ git init
+Initialized empty Git repository in /file/path/to/code/.git/
+```
+
+### Working with a remote repository ###
+
+If you already have a remote repository to work with, you can do so by cloning the repository from GitHub onto your local machine.
+In order to start working locally on an existing remote repository, we need clone it with the command:
+
+```bash
+git clone <repository path>
+```
+You can either clone it via HTTPS or SSH, according to your preferred authentication method as we have shown above.
+
+Both commands download a copy of the files in a folder named after the project’s name and preserve the connection with the remote repository. You can then navigate to the new directory with:
+```bash
+cd repository-name
+```
+...and start working on it locally.
+
+Now that we are all set we can start using git in the terminal.
+
+### A list of most fundamental git commands ###
+
+
+##### git add #####
+
+Before a file is available to commit to a repository, the file needs to be added to the Git index (staging area). There are a few different ways to use git add, by adding entire directories, specific files, or all unstaged
+
+```bash
+$ git add <file or directory name>
+```
+
+##### git commit #####
+
+Record the changes made to the files to a local repository. For easy reference, each commit has a unique ID.
+It’s best practice to include a message with each commit explaining the changes made in a commit. Adding a commit message helps to find a particular change or understanding the changes.
+
+Usage:
+
+```bash
+# Adding a commit with message
+$ git commit -m "Commit message in quotes"
+```
+
+##### git status #####
+This command returns the current state of the repository.
+git status will return the current working branch. If a file is in the staging area, but not committed, it shows with git status. Or, if there are no changes it’ll return nothing to commit, working directory clean.
+
+Usage:
+
+```bash
+# Message when files have not been staged (git add)
+$ git status
+On branch SecretTesting
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+    homepage/index.html
+
+# Message when files have been not been committed (git commit)
+$ git status
+On branch SecretTesting
+Your branch is up-to-date with 'origin/SecretTesting'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   homepage/index.html
+
+# Message when all files have been staged and committed
+$ git status
+On branch SecretTesting
+nothing to commit, working directory clean
+```
+
+##### git branch #####
+To determine what branch the local repository is on, add a new branch, or delete a branch.
+
+```bash
+# Create a new branch
+$ git branch <branch_name>
+
+# List all remote or local branches
+$ git branch -a
+
+# Delete a branch
+$ git branch -d <branch_name>
+```
+
+##### git checkout #####
+To start working in a different branch, use git checkout to switch branches.
+
+Usage:
+
+```bash
+# Checkout an existing branch
+$ git checkout <branch_name>
+
+# Checkout and create a new branch with that name
+$ git checkout -b <new_branch>
+```
+
+##### git remote #####
+To connect a local repository with a remote repository. A remote repository can have a name set to avoid having to remember the URL of the repository.
+
+Usage:
+
+```bash
+# Add remote repository
+$ git remote <command> <remote_name> <remote_URL>
+
+# List named remote repositories
+$ git remote -v
+```
+
+##### git clone #####
+
+We talked about how you can clone a remote repository. To create a local working copy of an existing remote repository, use git clone to copy and download the repository to a computer. Cloning is the equivalent of git init when working with a remote repository. Git will create a directory locally with all files and repository history.
+
+Usage:
+
+```bash
+$ git clone <remote_URL>
+In Practice:
+$ git clone git@account_name.git.beanstalkapp.com:/acccount_name/repository_name.git
+Cloning into 'repository_name'...
+remote: Counting objects: 5, done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 5 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (5/5), 3.08 KiB | 0 bytes/s, done.
+Checking connectivity... done.
+```
+
+##### git pull #####
+
+If you are working on a remote repository with a number of people, chances are they have pushed changes since your last clone. To get the latest version of a repository run git pull. This pulls the changes from the remote repository to the local computer.
+
+Usage:
+
+```bash
+$ git pull <branch_name> <remote_URL/remote_name>
+```
+
+##### git push #####
+
+Once you’ve made your changes and committed those changes you need to push those changes to the remote repository to make it available in the remote repository. This command sends local commits to the remote repository.
+
+git push requires two parameters: the remote repository and the branch that the push is for.
+
+Usage:
+
+```bash
+$ git push <remote_URL/remote_name> <branch>
+
+# Push all local branches to remote repository
+$ git push —all
+git log
+To show the chronological commit history for a repository. This helps give context and history for a repository. git log is available immediately on a recently cloned repository to see history.
+Usage:
+# Show entire git log
+
+####$ git log####
+
+# Show git log with date pameters
+$ git log --<after/before/since/until>=<date>
+
+# Show git log based on commit author
+$ git log --<author>="Author Name"
+```
+
+
+### How to resolve common git issues ###
+
+
+#### Q1. I have made a mistake with my last commit message, how do I amend that? ####
+
+Okay, so you have made a spelling mistake in your last commit message.
+You can pass the --amend flag to the commit command like the below example:
+
+```bash
+$ git commit --amend
+```
+
+This will prompt you to amed your last commit message or keep it as is.
+
+#### Q2. When I do ‘git status’ I see some changed files. I do not wish to commit these changes, how do I undo them? ####
+
+With the command “git checkout” you can reset the files to their original state:
+```bash
+# Reset file "myfilename"
+$ git checkout myfilename
+```
+
+A common Git pitfall is committing too early. You missed a file, forgot to save it, or need to make a minor change for the last commit to make sense.
+You can add the missing file as usual:
+
+```bash
+$ git add filename
+```
+And run the --ammend command above:
+```bash
+$ git commit --ammend
+```
+
+#### Q3. I forgot to add a file to my last commit. Can I add it back as part of the same commit? ####
+
+You have done exactly the opposite. You added a file which you didn’t intend to. Two difference scenarios:
+
+- You’ve added the file but haven’t committed yet.
+it's as simple as resetting that staged file:
+
+```bash
+git reset your_file_name
+```
+
+- You have added and committed the file.
+If you've gone as far as committing that change, you need to run an extra step before:
+
+```bash
+$ git reset --soft HEAD~1
+$ git reset file_name
+$ rm file_name
+$ git commit
+```
+
+This will undo the commit, remove the file, then add a new commit in its place.
+
+
+#### Q4. I mistakenly added a file. How to remove the file from the repository? ####
+
+So you're working on a new feature and in your haste, you forgot to open a new branch for it. You've already committed those changes and they are now sitting on your master branch.
+
+First off, double check if you have actually committed those changes by doing a git log.
+
+Next, create a new feature branch.
+
+```bash
+$ git branch your-feature-branch
+$ git reset HEAD~ --hard
+$ git checkout future-brunch
+```
+
+
+#### Q5.  I have been working on the master branch and forgot to create a new branch. All my changes have now gone into the master branch, can I still create a feature branch and transfer those changes from the master to my feature branch? ####
+
+
+There are two ways you can rename a branch.
+
+- If you are already sitting on the branch:
+
+```bash
+$ git branch -m “new-branch-name”
+```
+- If you are sittong on branch A but want to rename branch B:
+
+```bash
+$ git branch -m “your-old-branch-name” “your-new-branch-name”
+```
+
+#### Q6. I’ve made a spelling mistake when naming my branch, how do I rename it? ####
+
+You have already created four new commits and only now realize that one of these commits contains a major error
+
+If you want to undo one or more commits, you can use the “git reset” command.
+
+The command knows three different modes (soft, hard, mixed):
+
+```bash
+# Undo the last four commits, keep changes
+git reset HEAD ~ 4
+
+# Undo the last four commits, discard changes
+git reset --hard HEAD ~ 4
+```
+
+Caution: The “hard” mode should be used with a bit of caution. As soon as you execute “git reset — hard”, the working tree and the index are reset. All changes are then lost forever!
+
+#### Q7. How do I undo local commits? ####
+
+You often add a file to the staging area ( git add ) that doesn’t belong there. You can use the command “git rm “ here. However, this also removes the file from your file system.
+
+However, if you want to keep the file in the filesystem, you can better remove it from the staging area with:
+
+```bash
+git reset <filename>
+```
+
+Then add the file to the .gitignore so that you do not mistakenly pack it back into the staging index in the future. That’s how it’s done:
+
+```bash
+git reset filename
+echo filename >> .gitignore
+```
+#### Q8. Remove the file from Git without deleting it completely?  ####
+
+This requires more in-depth discussion. Here is a great resource which explains step by step how to resolve a merge conflict.
+
+https://www.atlassian.com/git/tutorials/using-branches/merge-conflicts
+
+
+#### Q9. I am trying to merge two branches but seeing a merge conflict waring. How do I resolve this? ####
+
+There is a compare link in Github interface, which you can use the compare between branches.
+
+#### Q10. How do I compare two branches to see what differences are there between those branches? ####
+
+There is a compare link in Github interface, which you can use the compare between branches.
+
+
+![GitHub compare link](./images/github-branch-compare.png)
+
+
+Once you’ve clicked the ‘Compare’ button, you will be presented with a screen below. The branch on the left side dropdown is the base branch you’d like to compare your branch against. The right side dropdown is where you can set your branch name.
+
+![Github compare two branches](./images/github-compare-branch-changes.png)
