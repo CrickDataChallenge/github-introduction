@@ -2,6 +2,8 @@
 
 GitHub houses the largest collection of source code from open source to private enterprise projects all over the world. It is used extensively by teams within software development companies and by individuals working on their own projects. If you want to manage a large code project, share your work, or collaborate with other developers, knowing how to use Git and Github is essential.
 
+This guide is intended for beginners who are not familiar with git, GitHub and, to some extent, the command line. It shows how to use several tools with graphical user interface and keeps usage of the command line to the minimum required for the Crick Data Challenge. If you would rather see how to use git at the command line, [here is a good Crick workshop about it](https://github.com/FrancisCrickInstitute/git-workshop).
+
 ## Table of contents ##
 
 - [Introduction to GitHub for the Crick Data Challenge](#introduction-to-gitHub-for-the-crick-data-challenge)
@@ -30,7 +32,7 @@ GitHub houses the largest collection of source code from open source to private 
 
 ## Prerequisites ##
 
-Create a GitHub account at [GitHub.com](https://github.com/join). The credentials for that account are yours to choose, they are not linked to Crick credentials. Once you have a GitHub account it is recommended to enable Two-factor Authenticate (2FA) on it.
+Create a GitHub account at [GitHub.com](https://github.com/join). The credentials for that account are yours to choose, they are not linked to Crick credentials. Once you have a GitHub account it is recommended to enable Two-Factor Authentication (2FA) on it.
 
 ## Terminology ##
 
@@ -97,7 +99,7 @@ It’s easier to write, build, and test your code using a compiler on your compu
 
 ### Why not just write on GitHub directly ###
 
-When working directly on GitHub, you can make a few small changes to the files in your repository and commit them, but **it's not a good practice** when making bigger code changes on large projects.  Typically, large projects have a lot of people involved with a lot of moving parts. Also, the changes involve a lot of coding. GitHub isn’t built for continuously code writing - just storing it!
+When working directly on GitHub, you can make a few small changes to the files in your repository and commit them, but **it's not a good practice** when making bigger code changes on large projects. Typically, large projects have a lot of people involved with a lot of moving parts. Also, the changes involve a lot of coding. GitHub isn’t built for continuously code writing - just storing it!
 
 Additionally, with a local repository, you can still use a version control system directly on your computer. Since Git is a distributed system, you have all the same functionalities on your local repo as you do on GitHub. This includes updating between your local repository and your remote repository. Let’s say you were working on a pretty big project with a specific feature that has taken you two weeks to complete!  Meanwhile, other team members have probably changed the code in that main repository on GitHub. So what do you do if there have been changes on the remote repository, especially if it's connected to the feature you are working on?
 
